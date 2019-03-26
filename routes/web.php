@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 Route::get('/professores', 'ProfessorController@index')->name('professores');
 Route::post('/professores', 'ProfessorController@cadastrar')->name('professor.cadastrar');
+Route::get('/professores{$id=1}', 'ProfessorController@editar')->name('professor.editar');

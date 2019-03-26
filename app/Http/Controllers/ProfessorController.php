@@ -20,6 +20,13 @@ class ProfessorController extends Controller
         Professor::create($professors);
         return redirect()->route('professores');
     }
+
+    public function editar($id)
+    {
+
+        $professors = Professor::find($id);
+        return view('professor',compact($professors));
+    }
 }
 
 
