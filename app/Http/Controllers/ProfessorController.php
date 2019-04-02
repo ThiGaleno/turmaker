@@ -13,15 +13,13 @@ class ProfessorController extends Controller
     {        
         
         if ($id)
-        {     
-            echo ("<script> alert('teste2'); </script>");        
+        {           
             $professors = Professor::all();
             $prof = Professor::find($id);
             return view('professores',compact('prof','professors'));   
                    
         } else 
         {
-            echo ("<script> alert('teste'); </script>");
             $professors = Professor::all();
             return view('professores',compact('professors'));
             
@@ -36,19 +34,14 @@ class ProfessorController extends Controller
         return redirect()->route('professores');
     }
 
-    /*public function editar($id)
+    public function atualizar(Request $request, $id)
     {
-
-        $professors = Professor::find($id);
-        return view('professores',compact($professors));
-   
-
-    public function editar($id)
-    {
-        $prof = Professor::find($id);
-        return view('professores',compact($prof));
+        $professors = $request->all();
+        Professor::find($id)->update($professors);
+        return redirect()->route('professores');
     }
-     }*/
+
+
 }
 
 

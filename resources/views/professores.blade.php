@@ -28,7 +28,7 @@
                     </div>  
                     <div class="col-sm">
                         <li class="list-group-item">
-                            <button class="btn  btn-light" http="{{ route('professores',$professor->id) }}" data-toggle="modal" data-target="#modalProfessoresEdit">editar</button>
+                            <a class="btn  btn-light" href="{{ route('professores',$professor->id) }}">editar</a>
                             <button class="btn  btn-danger">excluir</button>
                         </li>
                     </div>
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-@endsection
+
 
 
 <!-- Modal CADASTRAR -->
@@ -78,6 +78,12 @@
 
 
 <!-- Modal EDITAR -->
+@if(isset($prof))
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#modalProfessoresEdit').modal('show')
+});
+</script>
 
 <div class="modal fade" id="modalProfessoresEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -91,12 +97,11 @@
             </div>
             <div class="modal-body">
 
-            @if(isset($prof))
+            
             <form action="{{ route('professor.editar',$prof->id) }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="put">
-                    id:
-                    
+                   
                     <div class="form-group">
                         <label for="nome">Nome</label>
                         <input type="text" class="form-control" value="{{$prof->nome}}" name="nome" id="nome"
@@ -109,11 +114,12 @@
                                placeholder="Capoeira">
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
                 </form>
-            @endif
+            
             </div>
         </div>
     </div>
 </div>
-
+@endif
+@endsection
