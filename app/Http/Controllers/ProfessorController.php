@@ -41,6 +41,12 @@ class ProfessorController extends Controller
         return redirect()->route('professores');
     }
 
+    public function deletar($id)
+    {
+        Professor::destroy($id);
+        return redirect()->route('professores');
+    }
+
 
 }
 

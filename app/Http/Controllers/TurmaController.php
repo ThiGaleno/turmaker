@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Turma;
+use App\Professor;
+class TurmaController extends Controller
+{
+    public function index($id = null)
+    {        
+        $professores = Professor::all();
+
+        if ($id)
+        {           
+            $turmas = Turma::all();
+            $turmaId = Turma::find($id);
+            return view('turmas',compact('turmaId','turmas','professores'));   
+                   
+        } else 
+        {
+            $turmas = Turma::all();
+            return view('turmas',compact('turmas','professores'));
+            
+        }
+
+    }
+
+    public function cadastrar(Request $request)
+    {
+        $turmas = $request->all();
+        Turma::create($turmas);
+        return redirect()->route('turmas');
+    }
+
+    public function atualizar(Request $request, $id)
+    {
+        $turmas = $request->all();
+        Turma::find($id)->update($turmas);
+        return redirect()->route('turmas');
+    }
+
+    public function deletar($id)
+    {
+        Turma::destroy($id);
+        return redirect()->route('turmas');
+    }
+    
+}

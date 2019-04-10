@@ -29,7 +29,7 @@
                     <div class="col-sm">
                         <li class="list-group-item">
                             <a class="btn  btn-light" href="{{ route('professores',$professor->id) }}">editar</a>
-                            <button class="btn  btn-danger">excluir</button>
+                            <a class="btn  btn-danger" href="{{ route('professor.deletar',$professor->id) }}">excluir</a>
                         </li>
                     </div>
                 </div>

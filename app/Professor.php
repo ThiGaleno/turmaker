@@ -12,5 +12,4 @@ class Professor extends Model
     protected $fillable = ['nome', 'materia'];
     const UPDATED_AT = null;
 
-  
 }
