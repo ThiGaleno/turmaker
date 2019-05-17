@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 
 Route::get('/professores/{id?}', 'ProfessorController@index')->name('professores');
-Route::post('/professores', 'ProfessorController@cadastrar')->name('professor.cadastrar');
+Route::post('/professores/cadastrar', 'ProfessorController@cadastrar')->name('professor.cadastrar');
 Route::put('/professores/editar/{id}', 'ProfessorController@atualizar')->name('professor.editar');
 Route::get('/professores/deletar/{id}', 'ProfessorController@deletar')->name('professor.deletar');
 

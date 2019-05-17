@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Turma;
 use App\Professor;
+use DB;
 class TurmaController extends Controller
 {
     public function index($id = null)
@@ -19,7 +20,11 @@ class TurmaController extends Controller
                    
         } else 
         {
-            $turmas = Turma::all();
+           $turmas = Turma::all();
+          /* $turmas = DB::table('turmas')
+           ->join('professors', 'turmas.professores_id', '=', 'professors.id')    
+           ->get();
+            */
             return view('turmas',compact('turmas','professores'));
             
         }

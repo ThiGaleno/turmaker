@@ -15,6 +15,20 @@
 
             </div>
             <ul class="list-group list-group-flush">
+                <div class="row">
+                    <div class="col-sm">
+                        <li class="list-group-item">Professores</li>
+                    </div> 
+                    <div class="col-sm">
+                        <li class="list-group-item">Turmas</li>
+                    </div> 
+                    <div class="col-sm">
+                        <li class="list-group-item">Período</li>
+                    </div> 
+                    <div class="col-sm">
+                        <li class="list-group-item"></li>
+                    </div> 
+                </div> 
             @foreach($turmas as $turma)
                 <div class="row">
                     <div class="col-sm">

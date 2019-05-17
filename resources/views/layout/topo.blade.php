@@ -32,7 +32,10 @@
                           <a class="nav-link" href="/">Inicio</span></a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="professores">Professores</a>
+                          <a class="nav-link" href="../professores">Professores</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="../turmas">Turmas</a>
                         </li>
                         
                       </ul>
