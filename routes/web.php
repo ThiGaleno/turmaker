@@ -27,3 +27,9 @@ Route::get('/turmas/{id?}', 'TurmaController@index')->name('turmas');
 Route::post('/turmas', 'TurmaController@cadastrar')->name('turma.cadastrar');
 Route::put('/turmas/editar/{id}', 'TurmaController@atualizar')->name('turma.editar');
 Route::get('/turmas/deletar/{id}', 'TurmaController@deletar')->name('turma.deletar');
+
+
+Route::get('/alunos/{id?}', 'AlunoController@index')->name('alunos');
+Route::post('/alunos', 'AlunoController@cadastrar')->name('aluno.cadastrar');
+Route::put('/alunos/editar/{id}', 'AlunoController@atualizar')->name('aluno.editar');
+Route::get('/alunos/deletar/{id}', 'AlunoController@deletar')->name('aluno.deletar');

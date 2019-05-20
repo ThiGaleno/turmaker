@@ -14,17 +14,23 @@ class TurmaController extends Controller
 
         if ($id)
         {           
-            $turmas = Turma::all();
+           $turmas =  DB::table('turmas')
+            ->join('professors', 'turmas.professores_id', 'professors.id') 
+            ->select('turmas.nome as turma','professors.nome as professor','periodo','turmas.id')   
+            ->get();
+            
             $turmaId = Turma::find($id);
             return view('turmas',compact('turmaId','turmas','professores'));   
                    
         } else 
         {
-           $turmas = Turma::all();
-          /* $turmas = DB::table('turmas')
-           ->join('professors', 'turmas.professores_id', '=', 'professors.id')    
+          // $turmas = Turma::all();
+           $turmas = DB::table('turmas')
+           ->join('professors', 'turmas.professores_id', 'professors.id') 
+           ->select('turmas.nome as turma','professors.nome as professor','periodo','turmas.id','professores_id')   
            ->get();
-            */
+            
+           
             return view('turmas',compact('turmas','professores'));
             
         }

@@ -17,10 +17,10 @@
             <ul class="list-group list-group-flush">
                 <div class="row">
                     <div class="col-sm">
-                        <li class="list-group-item">Professores</li>
+                        <li class="list-group-item">Turmas</li>
                     </div> 
                     <div class="col-sm">
-                        <li class="list-group-item">Turmas</li>
+                        <li class="list-group-item">Professores</li>
                     </div> 
                     <div class="col-sm">
                         <li class="list-group-item">Período</li>
@@ -32,10 +32,10 @@
             @foreach($turmas as $turma)
                 <div class="row">
                     <div class="col-sm">
-                        <li class="list-group-item">{{$turma->professores_id}}</li>
+                        <li class="list-group-item">{{$turma->turma}}</li>
                     </div>   
                     <div class="col-sm">
-                        <li class="list-group-item">{{$turma->nome}}</li>
+                        <li class="list-group-item">{{$turma->professor}}</li>
                     </div>   
                     <div class="col-sm">
                         <li class="list-group-item">{{$turma->periodo}}</li>
@@ -138,12 +138,12 @@ $(document).ready(function() {
                     </div>
                     
                     <div class="form-group">
-                        <label for="professor">Turma </label>
+                        <label for="professor">Professor </label>
                         <select id="professor" class="form-control" name="professores_id">
-                        <option value="" >Sem professor fixo</option>
-                
+                        <option value="" >Sem professor fixo</option>                
                         @foreach($professores as $professor)
-                            <option value="{{$professor->id}}">{{$professor->nome}}</option>                
+                            <option value="{{$professor->id}}">{{$professor->nome}}</option>    
+                                       
                         @endforeach
                         </select>
                     </div>
