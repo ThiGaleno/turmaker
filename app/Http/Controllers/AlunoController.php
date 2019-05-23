@@ -12,23 +12,21 @@ class AlunoController extends Controller
     {        
         $turmas = Turma::all();
 
+        $alunos =  DB::table('alunos')
+            ->join('turmas', 'alunos.turmas_id', 'turmas.id') 
+            ->select('alunos.id','alunos.nome','alunos.data_nascimento','alunos.turno','alunos.categoria','turmas.nome as turmas')   
+            ->get();
+
         if ($id)
-        {               
-            $alunos = Aluno::all();            
+        {                       
             $alunoId = Aluno::find($id);
 
             return view('alunos',compact('alunoId','alunos','turmas'));   
                    
-        } else 
+        } 
+        else
         {
-            $alunos =  DB::table('alunos')
-            ->join('turmas', 'alunos.turmas_id', 'turmas.id') 
-            ->select('alunos.id','alunos.nome','alunos.data_nascimento','alunos.turno','alunos.categoria','turmas.nome as turmas')   
-            ->get();
-            
-          //$alunos = Aluno::all();           
-            return view('alunos',compact('alunos','turmas'));
-            
+            return view('alunos',compact('alunos','turmas'));            
         }
 
     }

@@ -137,7 +137,7 @@ $(document).ready(function() {
     $('#modalAlunosEdit').modal('show')
 });
 </script>
-{{$turmas}}
+
 <div class="modal fade" id="modalAlunosEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -181,10 +181,11 @@ $(document).ready(function() {
                     <div class="form-group">
                         <label for="turma">turma </label>
                         <select id="turma" class="form-control" name="turmas_id">
-                        <option value="" >Sem aluno fixo</option>
+                        <option value="" >SELECIONAR</option>
                         @foreach($turmas as $turma)
-                            <option value="{{$turma->id}}" >{{$turma->nome}}</option>                
+                            <option value="{{$turma->id}}" {{ $alunoId->turmas_id == $turma->id ? 'selected="selected"' : '' }} >{{$turma->nome}}</option>                
                         @endforeach
+
                         </select>
                     </div>
                     
