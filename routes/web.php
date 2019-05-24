@@ -33,3 +33,9 @@ Route::get('/alunos/{id?}', 'AlunoController@index')->name('alunos');
 Route::post('/alunos', 'AlunoController@cadastrar')->name('aluno.cadastrar');
 Route::put('/alunos/editar/{id}', 'AlunoController@atualizar')->name('aluno.editar');
 Route::get('/alunos/deletar/{id}', 'AlunoController@deletar')->name('aluno.deletar');
+
+
+Route::get('/horarios/{id?}', 'HorarioController@index')->name('horarios');
+Route::post('/horarios', 'HorarioController@cadastrar')->name('horario.cadastrar');
+Route::put('/horarios/editar/{id}', 'HorarioController@atualizar')->name('horario.editar');
+Route::get('/horarios/deletar/{id}', 'HorarioController@deletar')->name('horario.deletar');

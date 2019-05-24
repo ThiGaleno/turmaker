@@ -40,6 +40,9 @@
                         <li class="nav-item">
                           <a class="nav-link" href="../alunos">Alunos</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="../horarios">Horários</a>
+                        </li>
                         
                       </ul>
                       <form class="form-inline my-2 my-lg-0">
