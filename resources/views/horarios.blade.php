@@ -4,6 +4,61 @@
 
 @section('conteudo')
 
+<div class="table-responsive">
+    <table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+        <th scope="col-md-2">infanto 4 <br>vespertino</th>
+        <th scope="col">Segunda</th>
+        <th scope="col">Terça</th>
+        <th scope="col">Quarta</th>
+        <th scope="col">Quinta</th>
+        <th scope="col">Sexta</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <th scope="row">1º horário</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>@mdo</td>
+        <td>@mdo</td>
+        </tr>
+        <tr>
+        <th scope="row">2º horário</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>@fat</td>
+        <td>@fat</td>
+        </tr>
+        <tr>
+        <th scope="row">3º horário</th>
+        <td>Larry the</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+        </tr>
+        <tr>
+        <th scope="row">4º horário</th>
+        <td>Larry the</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+        <td>@twitter</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
 <div class="container">
     <div class="panel panel-primary">
         <div class="card">
