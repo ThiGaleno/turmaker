@@ -20,9 +20,7 @@ class AlunoController extends Controller
         if ($id)
         {                       
             $alunoId = Aluno::find($id);
-
-            return view('alunos',compact('alunoId','alunos','turmas'));   
-                   
+            return view('alunos',compact('alunoId','alunos','turmas'));                      
         } 
         else
         {

@@ -11,24 +11,24 @@ class HorarioController extends Controller
     public function index($id = null)
     {        
         $turmas = Turma::all();
-
-        /*$horarios =  DB::table('horarios')
-            ->join('turmas', 'horarios.turmas_id', 'turmas.id') 
-            ->select('horarios.id','horarios.nome','horarios.data_nascimento','horarios.turno','horarios.categoria','turmas.nome as turmas')   
+        $dias = Horario::all();
+        //->select('horarios.id','horarios.nome','horarios.data_nascimento','horarios.turno','horarios.categoria','turmas.nome as turmas')
+       
+       
+        $numero = 0;
+        $horarios =  DB::table('horarios')
+            ->join('turmas', 'horarios.turmas_id', 'turmas.id')            
             ->get();
-        */
-        $horarios = Horario::all();
+
 
         if ($id)
-        {                       
+        {    
             $horarioId = Horario::find($id);
-
-            return view('horarios',compact('horarioId','horarios','turmas'));   
-                   
+            return view('horarios',compact('horarioId','horarios','turmas','numero'));                    
         } 
         else
         {
-            return view('horarios',compact('horarios','turmas'));            
+            return view('horarios',compact('horarios','turmas','numero'));            
         }
 
     }
