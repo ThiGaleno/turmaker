@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Turma;
 use App\Professor;
+use App\Horario;
 use DB;
 class TurmaController extends Controller
 {
+    public function preencherHorarios($id) //preenche todos os horários de uma nova TURMA com "<vazio>" para exibição correta na view horários 
+    {
+        $dias = array("segunda", "terça", "quarta", "quinta", "sexta");
+        foreach ($dias as $dia){
+            
+            for ($ordem_aula = 1; $ordem_aula < 5 ; $ordem_aula++) 
+            {
+                DB::table('horarios')->insert([
+                    ['dia' => $dia, 'ordem_aula' => $ordem_aula, 'turmas_id' => $id, 'professores_id' => 1, 'materia' => '<vazio>']
+                ]);
+            }
+        }        
+    }
+
     public function index($id = null)
     {        
         $professores = Professor::all();
@@ -35,7 +50,8 @@ class TurmaController extends Controller
     public function cadastrar(Request $request)
     {
         $turmas = $request->all();
-        Turma::create($turmas);
+        $id = Turma::create($turmas)->id;
+        TurmaController::preencherHorarios($id);
         return redirect()->route('turmas');
     }
 

@@ -2,14 +2,13 @@
 @section('titulo','Bem vindo ao horarioker - horarios')
 @section('conteudo')
 
-
 @foreach($turmas as $turma)
 <div class="container">
     <div class="panel panel-primary">
         <div class="card">
             <div class="card-header"> 
                 <div class="row">
-                    <div class="col-sm-10">{{$turma->nome}}</div>                       
+                    <div class="col-sm-10">{{$turma->nome}} - {{$turma->periodo}}</div>                       
                     <div class="col-sm-2">
                         <a class="btn  btn-primary" href="{{ route('horarios',$turma->id) }}">editar</a>
                         <a class="btn  btn-danger" href="{{ route('horario.deletar',$turma->id) }}">excluir</a>
@@ -29,44 +28,31 @@
 
                 <div class="col">segunda<br>        
                     @foreach($horarios as $horario)             
-                        @if($horario->dia == 'segunda' && $horario->nome == $turma->nome)
-                            @if($horario->materia == "") 
-                            {{$horario->materia = "<vazio>"}}<br>
-                            @else
-                                {{$horario->materia}}<br> 
-                            @endif
+                        @if($horario->dia == 'segunda' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
+                            {{$horario->materia}}<br>                             
                         @endif                  
                     @endforeach        
                 </div>
 
                 <div class="col">terça<br>        
                     @foreach($horarios as $horario)  
-                        @if($horario->dia == 'terça' && $horario->nome == $turma->nome)                          
-                            @if($horario->materia == "") 
-                            {{$horario->materia = "<vazio>"}}<br>
-                            @else
-                                {{$horario->materia}}<br> 
-                            @endif 
+                        @if($horario->dia == 'terça' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)   
+                            {{$horario->materia}}<br>                            
                         @endif                  
                     @endforeach        
                 </div>
 
                 <div class="col">quarta<br>        
                     @foreach($horarios as $horario)  
-                        @if($horario->dia == 'quarta'  && $horario->nome == $turma->nome)                 
-                            @if($horario->materia == "") 
-                            {{$horario->materia = "<vazio>"}}<br>
-                            @else
-                                {{$horario->materia}}<br>
-                            @endif
-
+                        @if($horario->dia == 'quarta'  && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
+                            {{$horario->materia}}<br>
                         @endif                  
                     @endforeach        
                 </div>
 
                 <div class="col">quinta<br>        
                     @foreach($horarios as $horario)  
-                        @if($horario->dia == 'quinta'  && $horario->nome == $turma->nome)                          
+                        @if($horario->dia == 'quinta'  && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)                          
                             {{$horario->materia}}<br> 
                         @endif                  
                     @endforeach        
@@ -74,7 +60,7 @@
 
                 <div class="col">sexta<br>        
                     @foreach($horarios as $horario)  
-                        @if($horario->dia == 'sexta'  && $horario->nome == $turma->nome)                          
+                        @if($horario->dia == 'sexta'  && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)                          
                             {{$horario->materia}}<br> 
                         @endif                  
                     @endforeach        
@@ -83,7 +69,7 @@
             </div>
         </div>    
     </div>    
-    <hr>
+    <br>
 </div>
 @endforeach
 
