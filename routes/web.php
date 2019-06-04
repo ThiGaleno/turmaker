@@ -35,6 +35,12 @@ Route::put('/alunos/editar/{id}', 'AlunoController@atualizar')->name('aluno.edit
 Route::get('/alunos/deletar/{id}', 'AlunoController@deletar')->name('aluno.deletar');
 
 
+Route::get('/materias/{id?}', 'MateriaController@index')->name('materias');
+Route::post('/materias', 'MateriaController@cadastrar')->name('materia.cadastrar');
+Route::put('/materias/editar/{id}', 'MateriaController@atualizar')->name('materia.editar');
+Route::get('/materias/deletar/{id}', 'MateriaController@deletar')->name('materia.deletar');
+
+
 Route::get('/horarios/{id?}', 'HorarioController@index')->name('horarios');
 Route::post('/horarios', 'HorarioController@cadastrar')->name('horario.cadastrar');
 Route::put('/horarios/editar/{id}', 'HorarioController@atualizar')->name('horario.editar');
