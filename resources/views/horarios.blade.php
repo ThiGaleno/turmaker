@@ -2,6 +2,9 @@
 @section('titulo','Bem vindo ao horarioker - horarios')
 @section('conteudo')
 
+<script type="text/javascript" src='/js/horarios.js' ></script>
+
+
 @foreach($turmas as $turma)
 <div class="container">
     <div class="panel panel-primary">
@@ -19,11 +22,11 @@
 
             <div class="row">
                 <div class="col">
-                    {{$turma->nome}}<br>
-                    1ºHorário<br>        
-                    2ºHorário<br>        
-                    3ºHorário<br>        
-                    4ºHorário<br>
+                    
+                    1ºHorário<br />        
+                    2ºHorário<br />        
+                    3ºHorário<br />        
+                    4ºHorário<br />
                 </div>
 
                 <div class="col">segunda<br>        
@@ -212,7 +215,8 @@ $(document).ready(function() {
             @foreach($turmas as $turma) <!-- Preenche o nome e período da turma -->
             @if ($turma->id == $horarioId->id) <!-- faz com que exiba apenas a turma selecionada -->
                 <form action="{{ route('aluno.editar',$horarioId->id) }}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                    @csrf
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="put">
                     <div class="row">
                         <div class="col">
@@ -226,21 +230,26 @@ $(document).ready(function() {
                         <div class="col">segunda<br>        
                             @foreach($horarios as $horario)             
                                 @if($horario->dia == 'segunda' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                                    <select id="turma" class="form-control" name="turmas_id">
+                                    <select class="form-control atualizaHorario" name="turmas_id">
                                         <option value="{{$horario->idMateria}}" {{ $horarioId->id == $turma->id ? 'selected="selected"' : '' }} >{{$horario->materia}}</option>    
                                         @foreach($turmaSelects as $turmaSelect)                                                 
                                             @if($horario->ordem_aula == 1)                               
-                                                <option value="{{$turmaSelect->idMateria}}" >{{$turmaSelect->materia}} </option>  
-                                            @endif                                           
+                                                <option class="attHorario" value="{{$turmaSelect->idMateria}}" >{{$turmaSelect->materia}} </option>  
+                                            @endif
+
+                                            @if($horario->ordem_aula == 2)                               
+                                                <option class="attHorario" value="{{$turmaSelect->idMateria}}" >{{$turmaSelect->materia}} </option>  
+                                            @endif 
+
                                         @endforeach
                                     </select>             
                                 @endif                  
                             @endforeach        
                         </div>
-                        <div class="col">terça<br>        
+                        <div class="col">Terça<br>        
                             @foreach($horarios as $horario)             
                                 @if($horario->dia == 'terça' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                                    <select id="turma" class="form-control" name="turmas_id">
+                                    <select class="form-control atualizaHorario" name="turmas_id">
                                         <option value="{{$horario->idMateria}}" {{ $horarioId->id == $turma->id ? 'selected="selected"' : '' }} >{{$horario->materia}}</option>    
                                         @foreach($turmaSelects as $turmaSelect)                                                 
                                             @if($horario->ordem_aula == 1)                               
@@ -251,63 +260,8 @@ $(document).ready(function() {
                                 @endif                  
                             @endforeach        
                         </div>
-                        <div class="col">quarta<br>        
-                            @foreach($horarios as $horario)             
-                                @if($horario->dia == 'quarta' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                                    <select id="turma" class="form-control" name="turmas_id">
-                                        <option value="{{$horario->idMateria}}" {{ $horarioId->id == $turma->id ? 'selected="selected"' : '' }} >{{$horario->materia}}</option>    
-                                        @foreach($turmaSelects as $turmaSelect)                                                 
-                                            @if($horario->ordem_aula == 1)                               
-                                                <option value="{{$turmaSelect->idMateria}}" >{{$turmaSelect->materia}} </option>  
-                                            @endif                                           
-                                        @endforeach
-                                    </select>             
-                                @endif                  
-                            @endforeach        
-                        </div>
-                        <div class="col">quinta<br>        
-                            @foreach($horarios as $horario)             
-                                @if($horario->dia == 'quinta' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                                    <select id="turma" class="form-control" name="turmas_id">
-                                        <option value="{{$horario->idMateria}}" {{ $horarioId->id == $turma->id ? 'selected="selected"' : '' }} >{{$horario->materia}}</option>    
-                                        @foreach($turmaSelects as $turmaSelect)                                                 
-                                            @if($horario->ordem_aula == 1)                               
-                                                <option value="{{$turmaSelect->idMateria}}" >{{$turmaSelect->materia}} </option>  
-                                            @endif                                           
-                                        @endforeach
-                                    </select>             
-                                @endif                  
-                            @endforeach        
-                        </div>
-                        <div class="col">sexta<br>        
-                            @foreach($horarios as $horario)             
-                                @if($horario->dia == 'sexta' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                                    <select id="turma" class="form-control" name="turmas_id">
-                                        <option value="{{$horario->idMateria}}" {{ $horarioId->id == $turma->id ? 'selected="selected"' : '' }} >{{$horario->materia}}</option>    
-                                        @foreach($turmaSelects as $turmaSelect)                                                 
-                                            @if($horario->ordem_aula == 1)                               
-                                                <option value="{{$turmaSelect->idMateria}}" >{{$turmaSelect->materia}} </option>  
-                                            @endif                                           
-                                        @endforeach
-                                    </select>             
-                                @endif                  
-                            @endforeach        
-                        </div>
-
-
-                        <div class="col">terça<br>        
-                            @foreach($horarios as $horario)  
-                                @if($horario->dia == 'terça' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)   
-                                    {{$horario->materia}}<br>                            
-                                @endif                  
-                            @endforeach        
-                        </div>
-
                         
                     </div>
-                    
-
-
 
                     <div class="form-group">
                         <label for="turma">turma </label>
@@ -323,12 +277,17 @@ $(document).ready(function() {
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-primary">Atualizar</button>
                 </form>
-                @endif
-                @endforeach
+            @endif
+            @endforeach
+
+
+            <!-- Teste de layout -->
+
+            
             </div>
         </div>
     </div>
 </div>
 @endif
-<script src="../js/script.js"></script>
+
 @endsection
