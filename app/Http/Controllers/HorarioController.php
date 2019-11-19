@@ -16,9 +16,8 @@ class HorarioController extends Controller
     {        
         $turmas = Turma::all();
         $dias = Horario::all();
-        
-        
-        $horarios =  DB::table('horarios')
+                
+        $horarios =  DB::table('horarios') //Preenche os horários na página de horários
             ->join('turmas', 'horarios.turmas_id', 'turmas.id')  
             ->join('materias', 'horarios.materias_id', 'materias.id')   
             ->select('horarios.id','horarios.dia','horarios.ordem_aula','horarios.professores_id', 'horarios.turmas_id',
@@ -27,11 +26,11 @@ class HorarioController extends Controller
 
         if ($id)
         {    
-            $horarioId = Horario::find($id);            
-            
-            $horarioUnico = new HorarioControllerFacade();
-            $turmaSelects = $horarioUnico->gerarHorarios(1, 'segunda', 'matutino');
+            $horarioId = Horario::find($id);
+            $horarioUnico = new HorarioControllerFacade(); //Preenche os campos SELECT no MODAL de EDIÇÃO de horários
+            $turmaSelects = $horarioUnico->gerarHorarios();
 
+            
             return view('horarios',compact('horarioId','horarios','turmas','turmaSelects'));                 
         } 
         else
