@@ -30,7 +30,7 @@ class HorarioControllerFacade{
             $ordemPeriodo[$periodo] = $ordemDia;
         }
         $turmaSelects = $ordemPeriodo; 
-        //dd($turmaSelects); <------------> Descubra o resultado/estrutura de array que essa bagaceira de cima monta
+        dd($turmaSelects);  //<------------> Descubra o resultado/estrutura de array que essa bagaceira de cima monta
         return $turmaSelects;
     }
 }

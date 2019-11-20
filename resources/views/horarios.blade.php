@@ -212,19 +212,22 @@ $(document).ready(function() {
                 </button>
             </div>
             <div class="modal-body">
-                @foreach($turmaSelects as $key => $dia)
-                    @if ($key == $turma->periodo) <!-- Se a turma é do período matutino\vespertino !-->
-                        {{$key}}  <!-- aqui são só as turmas dentro de um período (matutino no caso)!-->                        
-                    @endif
-                   
-                    
-                    @foreach($dia as $key => $order)
-                        @foreach($order as $selects)
-
+                @foreach($turmaSelects as $key => $dia) <!-- $key = periodos matutino\vespertino!-->
+                    <br>{{$key}}<br>
+                    @if ($key == $turma->periodo) <!-- Filtra o período matutino e vespertino !-->                        
+                        @foreach($dia as $key => $order) <!-- $key = dias da semana !-->
+                        {{$key}}
+                            @foreach($order as $key => $selects) <!-- $key = 1, 2, 3, 4 de segunda!-->
+                                {{$key}}
+                                @foreach($selects as $key => $select)
+                                    @foreach($select as $key => $materias)
+                                        {{$materias}}
+                                    @endforeach
+                                @endforeach               
+                            @endforeach
+                               <br>
                         @endforeach
-
-                    @endforeach
-
+                    @endif
                 @endforeach
 
             <br><br><br>
