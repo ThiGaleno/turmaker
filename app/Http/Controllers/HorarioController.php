@@ -26,11 +26,11 @@ class HorarioController extends Controller
 
         if ($id)
         {    
-            $horarioId = Horario::find($id);
+            $horarioId = Turma::find($id);
             $horarioUnico = new HorarioControllerFacade(); //Preenche os campos SELECT no MODAL de EDIÇÃO de horários
             $turmaSelects = $horarioUnico->gerarHorarios();
 
-            
+            //dd($horarioId);
             return view('horarios',compact('horarioId','horarios','turmas','turmaSelects'));                 
         } 
         else
