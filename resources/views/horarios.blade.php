@@ -238,11 +238,11 @@ $(document).ready(function() {
                                             @foreach($order as $keyOrder => $selects) <!-- $key = 1, 2, 3, 4 horário de cada dia da semana!-->
                                                 <div class="row">
                                                     @if ($keyOrder == '1')
-                                                        <select class="form-control">
+                                                        <select class="form-control atualizaHorario">
                                                             <option selected>selecionar</option>
                                                             @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
                                                                 @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
-                                                                    <option selected>{{$horario->materia}}</option>
+                                                                    <option value="{{$horario->idMateria}}" selected>{{$horario->materia}}</option>
                                                                 @endif
                                                             @endforeach
 
@@ -254,7 +254,7 @@ $(document).ready(function() {
 
                                                     @if ($keyOrder == '2')
                                                     
-                                                        <select class="form-control">
+                                                        <select class="form-control atualizaHorario">
                                                             <option selected>selecionar</option>
                                                             @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
                                                                 @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
@@ -268,7 +268,7 @@ $(document).ready(function() {
                                                         </select>                
                                                     @endif
                                                     @if ($keyOrder == '3')
-                                                        <select class="form-control">
+                                                        <select class="form-control atualizaHorario">
                                                             <option selected>selecionar</option>
                                                             @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
                                                                 @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
@@ -282,7 +282,7 @@ $(document).ready(function() {
                                                         </select>                                   
                                                     @endif
                                                     @if ($keyOrder == '4')
-                                                        <select class="form-control">
+                                                        <select class="form-control atualizaHorario">
                                                             <option selected>selecionar</option>
                                                             @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
                                                                 @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)

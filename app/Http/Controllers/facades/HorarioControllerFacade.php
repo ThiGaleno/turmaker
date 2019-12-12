@@ -12,7 +12,7 @@ class HorarioControllerFacade{
             //$turmas = [1, 2, 3, 4];
             $periodos = ['matutino', 'vespertino'];
 
-        foreach($periodos as $periodo){
+        foreach($periodos as $periodo){ 
             foreach($dias as $dia){
                 foreach($aulas as $aula){
                     $ordemAula[$aula] = DB::select(
