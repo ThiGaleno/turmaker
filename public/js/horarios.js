@@ -1,32 +1,33 @@
+function atualizarHorario($id, $turma, $periodo) {}
 
-function atualizarHorario($id , $turma, $periodo){
-
-}
-
-$(document).ready(function(){
-    $('.atualizaHorario').change(function() {  
-        let meuHorario = this.value;        
-        console.log(meuHorario);
+$(document).ready(function () {
+    $(".atualizaHorario").change(function () {
+        let meuHorario = this.value;
+        let atualizaHorario = JSON.parse(meuHorario);
+        console.log(atualizaHorario["idMateria"]);
+        console.log(atualizaHorario["ordem_aula"]);
+        console.log(atualizaHorario["dia"]);
+        const id_turma = atualizaHorario["turma_id"];
+        console.log(atualizaHorario["periodo"]);
     });
 });
 
-
-/*$.ajax({
+$.ajax({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
     },
-    type: 'POST',
-    url: '/horarios' ,
+    type: "POST",
+    url: "/horarios/editar/2",
     data: {
         "_token": "{{ csrf_token() }}",
-        nome: 'thiago galã',
-        gata: 'amorzoca'        
-    }            
-}); 
-*/       
+        nome: "thiagoCG",
+    },
+    dataType: "json",
+    success: function (response) {
+        console.log(response + "ta rolando um ajax aqui");
+    }
+});
 
-
-
-function captarHorarios(){
-    console.log('function success');
+function captarHorarios() {
+    console.log("function success");
 }

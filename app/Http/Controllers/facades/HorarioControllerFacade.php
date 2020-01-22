@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers\facades;
 
-use DB;
+use Illuminate\Support\Facades\DB;
+
 class HorarioControllerFacade{
        
     function gerarHorarios(){
-
         $turmaSelects = [] ;            
             $dias = ["segunda", "terça", "quarta", "quinta", "sexta"];           
             $aulas = [1, 2, 3, 4];
@@ -15,6 +15,7 @@ class HorarioControllerFacade{
         foreach($periodos as $periodo){ 
             foreach($dias as $dia){
                 foreach($aulas as $aula){
+                    
                     $ordemAula[$aula] = DB::select(
                         "SELECT materias.id as idMateria, materias.nome as materia FROM horarios 
                         inner join turmas on horarios.turmas_id = turmas.id
@@ -32,5 +33,9 @@ class HorarioControllerFacade{
         $turmaSelects = $ordemPeriodo; 
         //dd($turmaSelects);  //<------------> Descubra o resultado/estrutura de array que essa bagaceira de cima monta
         return $turmaSelects;
+    }
+
+    public function limparHorariosTurma($id){
+
     }
 }

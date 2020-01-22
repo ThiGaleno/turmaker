@@ -6,18 +6,18 @@ use Illuminate\Http\Request;
 use App\Turma;
 use App\Professor;
 use App\Horario;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 class TurmaController extends Controller
 {
-    public function preencherHorarios($id) //preenche todos os horários de uma nova TURMA com "<vazio>" para exibição correta na view horários 
-    {
+    public function preencherHorarios($id, $turmas) //preenche todos os horários de uma nova TURMA com "<vazio>" para exibição correta na view horários 
+    {    
         $dias = array("segunda", "terça", "quarta", "quinta", "sexta");
-        foreach ($dias as $dia){
-            
+        foreach ($dias as $dia){            
             for ($ordem_aula = 1; $ordem_aula < 5 ; $ordem_aula++) 
             {
                 DB::table('horarios')->insert([
-                    ['dia' => $dia, 'ordem_aula' => $ordem_aula, 'turmas_id' => $id, 'professores_id' => 1, 'materia' => '<vazio>']
+                    ['dia' => $dia, 'ordem_aula' => $ordem_aula, 'turmas_id' => $id, 'professores_id' => $turmas['professores_id'], 'materias_id' => '9']
                 ]);
             }
         }        
@@ -51,7 +51,7 @@ class TurmaController extends Controller
     {
         $turmas = $request->all();
         $id = Turma::create($turmas)->id;
-        TurmaController::preencherHorarios($id);
+        TurmaController::preencherHorarios($id, $turmas);
         return redirect()->route('turmas');
     }
 
@@ -64,6 +64,11 @@ class TurmaController extends Controller
 
     public function deletar($id)
     {
+        DB::table('horarios')
+        ->where('turmas_id',"$id")
+        ->delete();
+        
+
         Turma::destroy($id);
         return redirect()->route('turmas');
     }

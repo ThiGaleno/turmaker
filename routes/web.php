@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('index');
 });
@@ -43,11 +45,5 @@ Route::get('/materias/deletar/{id}', 'MateriaController@deletar')->name('materia
 
 Route::get('/horarios/{id?}', 'HorarioController@index')->name('horarios');
 Route::post('/horarios', 'HorarioController@cadastrar')->name('horario.cadastrar');
-Route::put('/horarios/editar/{id}', 'HorarioController@atualizar')->name('horario.editar');
+Route::post('/horarios/editar/{id}', 'HorarioController@atualizar')->name('horario.editar');
 Route::get('/horarios/deletar/{id}', 'HorarioController@deletar')->name('horario.deletar');
-
-Route::get('/horarios', function(){
-    if(Request::ajax()){
-        return 'aconteceu';
-    }
-});

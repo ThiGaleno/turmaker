@@ -85,7 +85,7 @@
             <div class="form-group">
             <label for="professor">Turma </label>
             <select id="professor" class="form-control" name="professores_id">
-            <option value="" >Sem professor fixo</option>
+            
             @foreach($professores as $professor)
                 <option value="{{$professor->id}}" >{{$professor->nome}}</option>                
             @endforeach
@@ -140,7 +140,7 @@ $(document).ready(function() {
                     <div class="form-group">
                         <label for="professor">Professor </label>
                         <select id="professor" class="form-control" name="professores_id">
-                        <option value="" >Sem professor fixo</option>                
+                                 
                         @foreach($professores as $professor)
                             <option value="{{ $professor->id }}" {{ $turmaId->professores_id == $professor->id ? 'selected="selected"' : '' }} >{{$professor->nome}}</option>    
                                     

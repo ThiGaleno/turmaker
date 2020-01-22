@@ -2,207 +2,99 @@
 @section('titulo','Bem vindo ao horarioker - horarios')
 @section('conteudo')
 
-<script type="text/javascript" src='/js/horarios.js' ></script>
+<script type="text/javascript" src='/js/horarios.js'></script>
 
 
 @foreach($turmas as $turma)
 <div class="container">
     <div class="panel panel-primary">
         <div class="card">
-            <div class="card-header"> 
+            <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-10">{{$turma->nome}} - {{$turma->periodo}}</div>                       
+                    <div class="col-sm-10 text-danger font-weight-bold">
+                        <h4>{{$turma->nome}} - {{$turma->periodo}}</h4>
+                    </div>
                     <div class="col-sm-2">
                         <a class="btn  btn-primary" href="{{ route('horarios',$turma->id) }}">editar</a>
-                        <a class="btn  btn-danger" href="{{ route('horario.deletar',$turma->id) }}">excluir</a>
-                    </div> 
+
+                    </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div>#</div>
+                        <div class="font-weight-bold">1º horario </div>
+                        <div class="font-weight-bold">2º horario </div>
+                        <div class="font-weight-bold">3º horario </div>
+                        <div class="font-weight-bold">4º horario </div>
+                    </div>
 
-
-            <div class="row">
-                <div class="col">
-                    
-                    1ºHorário<br />        
-                    2ºHorário<br />        
-                    3ºHorário<br />        
-                    4ºHorário<br />
-                </div>
-
-                <div class="col">segunda<br>        
-                    @foreach($horarios as $horario)             
+                    <div class="col">
+                        <div class="font-weight-bold">Segunda</div>
+                        @foreach($horarios as $horario)
                         @if($horario->dia == 'segunda' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                            {{$horario->materia}}<br>                             
-                        @endif                  
-                    @endforeach        
-                </div>
+                        <div>{{$horario->materia}}</div>
+                        @endif
+                        @endforeach
+                    </div>
 
-                <div class="col">terça<br>        
-                    @foreach($horarios as $horario)  
-                        @if($horario->dia == 'terça' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)   
-                            {{$horario->materia}}<br>                            
-                        @endif                  
-                    @endforeach        
-                </div>
+                    <div class="col">
+                        <div class="font-weight-bold">Terça</div>
+                        @foreach($horarios as $horario)
+                        @if($horario->dia == 'terça' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
+                        <div>{{$horario->materia}}</div>
+                        @endif
+                        @endforeach
+                    </div>
 
-                <div class="col">quarta<br>        
-                    @foreach($horarios as $horario)  
-                        @if($horario->dia == 'quarta'  && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
-                            {{$horario->materia}}<br>
-                        @endif                  
-                    @endforeach        
-                </div>
+                    <div class="col">
+                        <div class="font-weight-bold">Quarta</div>
+                        @foreach($horarios as $horario)
+                        @if($horario->dia == 'quarta' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
+                        <div>{{$horario->materia}}</div>
+                        @endif
+                        @endforeach
+                    </div>
 
-                <div class="col">quinta<br>        
-                    @foreach($horarios as $horario)  
-                        @if($horario->dia == 'quinta'  && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)                          
-                            {{$horario->materia}}<br> 
-                        @endif                  
-                    @endforeach        
-                </div>
+                    <div class="col">
+                        <div class="font-weight-bold">Quinta</div>
+                        @foreach($horarios as $horario)
+                        @if($horario->dia == 'quinta' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
+                        <div>{{$horario->materia}}</div>
+                        @endif
+                        @endforeach
+                    </div>
 
-                <div class="col">sexta<br>        
-                    @foreach($horarios as $horario)  
-                        @if($horario->dia == 'sexta'  && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)                          
-                            {{$horario->materia}}<br> 
-                        @endif                  
-                    @endforeach        
+                    <div class="col">
+                        <div class="font-weight-bold">Sexta</div>
+                        @foreach($horarios as $horario)
+                        @if($horario->dia == 'sexta' && $horario->nome == $turma->nome && $horario->periodo == $turma->periodo)
+                        <div>{{$horario->materia}}</div>
+                        @endif
+                        @endforeach
+                    </div>
                 </div>
-
             </div>
-        </div>    
-    </div>    
+        </div>
+    </div>
     <br>
 </div>
 @endforeach
 
 
-
-
-
-<div class="container">
-    <div class="panel panel-primary">
-        <div class="card">
-            <div class="card-header">                
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalHorarios">
-                Cadastrar
-                </button>
-
-            </div>
-            <ul class="list-group list-group-flush">
-                <div class="row">
-                    <div class="col-sm">
-                        <li class="list-group-item">dia</li>
-                    </div> 
-                    <div class="col-sm">
-                        <li class="list-group-item">Ordem da aula</li>
-                    </div> 
-                    <div class="col-sm">
-                        <li class="list-group-item">Turma</li>
-                    </div> 
-                    <div class="col-sm">
-                        <li class="list-group-item">Professor</li>
-                    </div> 
-                    <div class="col-sm">
-                        <li class="list-group-item">Materia</li>
-                    </div> 
-                    <div class="col-sm">
-                        <li class="list-group-item"></li>
-                    </div> 
-                </div> 
-           
-                
-            </ul>           
-        </div>
-    </div>
-</div>
-
-
-
-
-<!-- Modal CADASTRAR -->
-<div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastrar horario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!--
-        <form action="{{route('horario.cadastrar')}}" method="post" enctype="multipart/form-data">
-        {{ csrf_field() }}
-            <div class="form-group">
-                <label for="nome">Nome da horario</label>
-                <input type="text" class="form-control" name="nome" id="nome" aria-describedby="nomeObrigatorio" placeholder="horario X">
-                <small id="nomeObrigatorio" class="form-text text-muted">Digite o nome do horario.</small>
-            </div>
-            <div class="form-group">
-                <label for="turno">turno </label>
-                <select id="turno" class="form-control" name="turno">
-                <option value="matutino" >Matutino</option>
-                <option value="vespertino" >Vespertino</option>                
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="categoria">Ordem da aula </label>
-                <select id="categoria" class="form-control" name="ordem_aula">
-                    <option value="1" >1º horário</option>
-                    <option value="2" >2º horário</option>                
-                    <option value="3" >3º horário</option>                
-                    <option value="4" >4º horário</option>    
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="categoria">Dia </label>
-                <select id="categoria" class="form-control" name="dia">
-                    <option value="segunda" >Segunda</option>
-                    <option value="terca" >Terça</option>                
-                    <option value="quarta" >Quarta</option>                
-                    <option value="quinta" >Quinta</option>                
-                    <option value="sexta" >Sexta</option>  
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="turma">turma </label>
-                <select id="turma" class="form-control" name="turmas_id">
-                <option value="" >Sem horario fixo</option>
-                @foreach($turmas as $turma)
-                    <option value="{{$turma->id}}" >{{$turma->nome}}</option>                
-                @endforeach
-                </select>
-            </div>
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            
-        </form>
-        -->
-
-
-      </div>
-    </div>      
-  </div>
-</div>
-
-
 <!-- Modal EDITAR -->
 
-@if(isset($horarioId)) <!-- horarioId serve para preencher tudo menos as TURMAS nas caixas de seleção -->
+@if(isset($horarioId))
+<!-- Abre modal editar, $horarioId == id da turma -->
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#modalHorariosEdit').modal('show')
-});
+    $(document).ready(function() {
+        $('#modalHorariosEdit').modal('show')
+    });
 </script>
 
 
-<div class="modal fade" id="modalHorariosEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modalHorariosEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -214,101 +106,118 @@ $(document).ready(function() {
             <div class="modal-body mx-3">
                 <form action="{{ route('aluno.editar',$horarioId->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="_method" value="put">                    
-                        <!-- codigo importante-->
-                        @foreach($turmaSelects as $keyPeriodo => $dia) <!-- $key = periodos matutino\vespertino!-->
-                            @if ($keyPeriodo == $horarioId->periodo) <!-- Filtra o período matutino e vespertino !-->
-                                <div class="row">
-                                    <div class="col-auto mr-2">
-                                        <div class="row">
-                                            <div class="font-weight-bold font-italic text-primary">{{$keyPeriodo}}</div>
-                                        </div>
-                                        <div class="row"><div class="form-control-plaintext font-weight-bold">1º horario </div>
-                                        </div>
-                                        <div class="row"><div class="form-control-plaintext font-weight-bold">2º horario</div>
-                                        </div>
-                                        <div class="row"><div class="form-control-plaintext font-weight-bold">3º horario</div>
-                                        </div>
-                                        <div class="row"><div class="form-control-plaintext font-weight-bold">4º horario</div>
-                                        </div>
-                                    </div>
-                                    @foreach($dia as $keySemana => $order) <!-- $key = dias da semana !-->
-                                        <div class="col">
-                                            <div class="d-flex justify-content-center font-weight-bold">{{$keySemana}}</div>
-                                            @foreach($order as $keyOrder => $selects) <!-- $key = 1, 2, 3, 4 horário de cada dia da semana!-->
-                                                <div class="row">
-                                                    @if ($keyOrder == '1')
-                                                        <select class="form-control atualizaHorario">
-                                                            <option selected>selecionar</option>
-                                                            @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
-                                                                @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
-                                                                    <option value="{{$horario->idMateria}}" selected>{{$horario->materia}}</option>
-                                                                @endif
-                                                            @endforeach
+                    <input type="hidden" name="_method" value="put">
+                    <!-- codigo importante-->
+                    @foreach($turmaSelects as $keyPeriodo => $dia)
+                    <!-- $key = periodos matutino\vespertino!-->
 
-                                                            @foreach ($selects as $select ) <!-- preenche os <option> das materias livres para cadastrar !-->
-                                                                <option value="{{$select->idMateria}}">{{$select->materia}}</option>
-                                                            @endforeach 
-                                                        </select>                                  
-                                                    @endif
+                    @if ($keyPeriodo == $horarioId->periodo)
+                    <!-- Filtra o período matutino e vespertino !-->
+                    <div class="row">
+                        <div class="col-auto mr-2">
+                            <div class="row">
+                                <div class="font-weight-bold font-italic text-primary">{{$keyPeriodo}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="form-control-plaintext font-weight-bold">1º horario </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-control-plaintext font-weight-bold">2º horario</div>
+                            </div>
+                            <div class="row">
+                                <div class="form-control-plaintext font-weight-bold">3º horario</div>
+                            </div>
+                            <div class="row">
+                                <div class="form-control-plaintext font-weight-bold">4º horario</div>
+                            </div>
+                        </div>
+                        @foreach($dia as $keySemana => $order)
+                        <!-- $key = dias da semana !-->
 
-                                                    @if ($keyOrder == '2')
-                                                    
-                                                        <select class="form-control atualizaHorario">
-                                                            <option selected>selecionar</option>
-                                                            @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
-                                                                @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
-                                                                    <option selected>{{$horario->materia}}</option>
-                                                                @endif
-                                                            @endforeach
-
-                                                            @foreach ($selects as $select ) <!-- preenche os <option> das materias livres para cadastrar !-->
-                                                                <option value="{{$select->idMateria}}">{{$select->materia}}</option>
-                                                            @endforeach 
-                                                        </select>                
-                                                    @endif
-                                                    @if ($keyOrder == '3')
-                                                        <select class="form-control atualizaHorario">
-                                                            <option selected>selecionar</option>
-                                                            @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
-                                                                @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
-                                                                    <option selected>{{$horario->materia}}</option>
-                                                                @endif
-                                                            @endforeach
-
-                                                            @foreach ($selects as $select ) <!-- preenche os <option> das materias livres para cadastrar !-->
-                                                                <option value="{{$select->idMateria}}">{{$select->materia}}</option>
-                                                            @endforeach 
-                                                        </select>                                   
-                                                    @endif
-                                                    @if ($keyOrder == '4')
-                                                        <select class="form-control atualizaHorario">
-                                                            <option selected>selecionar</option>
-                                                            @foreach ($horarios as $horario)<!--preenche <option> do horário SELECTED !-->
-                                                                @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
-                                                                    <option selected>{{$horario->materia}}</option>
-                                                                @endif
-                                                            @endforeach
-
-                                                            @foreach ($selects as $select ) <!-- preenche os <option> das materias livres para cadastrar !-->
-                                                                <option value="{{$select->idMateria}}">{{$select->materia}}</option>
-                                                            @endforeach 
-                                                        </select>                                   
-                                                    @endif
-                                                </div>
-                                            @endforeach
-                                            <br>
-                                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-center font-weight-bold">{{$keySemana}}</div>
+                            @foreach($order as $keyOrder => $selects)
+                            <!-- $key = 1, 2, 3, 4 horário de cada dia da semana!-->
+                            <div class="row">
+                                @if ($keyOrder == '1')
+                                <!-- preenche a linha dos primeiros horário de segunda a sexta !-->
+                                <select class="form-control atualizaHorario">
+                                    @foreach ($horarios as $horario)
+                                    <!--preenche <option> do horário SELECTED !-->
+                                    @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
+                                    <option value="{{json_encode($horario)}}" selected>{{$horario->materia}}</option>
+                                    @endif
                                     @endforeach
-                                </div>
-                            @endif
+
+                                    @foreach ($selects as $select )
+                                    <!-- preenche os <option> das materias livres para cadastrar !-->
+                                    <option value="{{json_encode(['idMateria' => $select->idMateria, 'ordem_aula' => $keyOrder, 'dia' => $keySemana, 'turma_id' => $horarioId->id, 'periodo' => $keyPeriodo])}}">{{$select->materia}}</option>
+                                    @endforeach
+                                </select>
+                                @endif
+
+                                @if ($keyOrder == '2')
+                                <!-- preenche a linha dos segundos horários de segunda a sexta !-->
+                                <select class="form-control atualizaHorario">
+                                    @foreach ($horarios as $horario)
+                                    <!--preenche <option> do horário SELECTED !-->
+                                    @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
+                                    <option value="{{json_encode($horario)}}" selected>{{$horario->materia}}</option>
+                                    @endif
+                                    @endforeach
+
+                                    @foreach ($selects as $select )
+                                    <!-- preenche os <option> das materias livres para cadastrar !-->
+                                    <option value="{{json_encode(['idMateria' => $select->idMateria, 'ordem_aula' => $keyOrder, 'dia' => $keySemana, 'turma_id' => $horarioId->id, 'periodo' => $keyPeriodo])}}">{{$select->materia}}</option>
+                                    @endforeach
+                                </select>
+                                @endif
+                                @if ($keyOrder == '3')
+                                <!-- preenche a linha dos terceiros horários de segunda a sexta !-->
+                                <select class="form-control atualizaHorario">
+                                    @foreach ($horarios as $horario)
+                                    <!--preenche <option> do horário SELECTED !-->
+                                    @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
+                                    <option value="{{json_encode($horario)}}" selected>{{$horario->materia}}</option>
+                                    @endif
+                                    @endforeach
+
+                                    @foreach ($selects as $select )
+                                    <!-- preenche os <option> das materias livres para cadastrar !-->
+                                    <option value="{{json_encode(['idMateria' => $select->idMateria, 'ordem_aula' => $keyOrder, 'dia' => $keySemana, 'turma_id' => $horarioId->id, 'periodo' => $keyPeriodo])}}">{{$select->materia}}</option>
+                                    @endforeach
+                                </select>
+                                @endif
+                                @if ($keyOrder == '4')
+                                <!-- preenche a linha dos quartos horário de segunda a sexta !-->
+                                <select class="form-control atualizaHorario">
+                                    @foreach ($horarios as $horario)
+                                    <!--preenche <option> do horário SELECTED !-->
+                                    @if ($horario->turmas_id == $horarioId->id && $horario->dia == $keySemana && $horario->ordem_aula == $keyOrder)
+                                    <option value="{{json_encode($horario)}}" selected>{{$horario->materia}}</option>
+                                    @endif
+                                    @endforeach
+
+                                    @foreach ($selects as $select )
+                                    <!-- preenche os <option> das materias livres para cadastrar !-->
+                                    <option value="{{json_encode(['idMateria' => $select->idMateria, 'ordem_aula' => $keyOrder, 'dia' => $keySemana, 'turma_id' => $horarioId->id, 'periodo' => $keyPeriodo])}}">{{$select->materia}}</option>
+                                    @endforeach
+                                </select>
+                                @endif
+                            </div>
+                            @endforeach
+                            <br>
+                        </div>
                         @endforeach
+                    </div>
+                    @endif
+                    @endforeach
                 </form>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Atualizar</button>            
+                <button type="submit" class="btn btn-primary">Atualizar</button>
             </div>
         </div>
     </div>
