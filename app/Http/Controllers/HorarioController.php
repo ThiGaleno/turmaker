@@ -6,19 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\facades\HorarioControllerFacade;
 use App\Horario;
 use App\Turma;
-use App\Materia;
 use Illuminate\Support\Facades\DB;
 
 class HorarioController extends Controller
 {
-
-
     public function index($id = null)
     {
         $turmas = Turma::all();
         $dias = Horario::all();
 
-        $horarios =  DB::table('horarios') //Preenche os horários na página de horários
+        $horarios = DB::table('horarios') //Preenche os horários na página de horários
             ->join('turmas', 'horarios.turmas_id', 'turmas.id')
             ->join('materias', 'horarios.materias_id', 'materias.id')
             ->select(
@@ -41,15 +38,16 @@ class HorarioController extends Controller
             $turmaSelects = $horarioUnico->gerarHorarios();
             //dd($horarioId);
             return view('horarios', compact('horarioId', 'horarios', 'turmas', 'turmaSelects'));
-        } else {
-            return view('horarios', compact('horarios', 'turmas'));
         }
+
+        return view('horarios', compact('horarios', 'turmas'));
     }
 
     public function cadastrar(Request $request)
     {
         $horarios = $request->all();
         Horario::create($horarios);
+
         return redirect()->route('horarios');
     }
 
@@ -73,7 +71,7 @@ class HorarioController extends Controller
         $horarios = DB::table('horarios')
             ->where('turmas_id', "$id")
             ->delete();
+
         return route('turma.deletar', $id);
-        //return redirect()->route('horarios');
     }
 }

@@ -19,7 +19,11 @@
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^7.5",
+        "phpmd/phpmd": "^2.8",
+        "phpunit/php-code-coverage": "^7.0",
+        "sebastian/phpcpd": "^4.1",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "config": {
         "optimize-autoloader": true,
@@ -57,6 +61,15 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test-codequality": "./vendor/bin/phpmd ./app text phpmd-ics --exclude app/Entities/*",
+        "cs-psr12-check": "phpcs --standard=PSR12 app/ tests/",
+        "cs-phpdoc-check": "phpcs ./app ./tests --standard=Squiz --sniffs=Squiz.Commenting.FunctionCommentThrowTag,Squiz.Commenting.VariableComment",
+        "test-coverage-clover": "phpunit --colors=always --coverage-clover code-coverage-clover.xml",
+        "test-coverage-html": "phpunit --colors=always --coverage-html code-coverage",
+        "test": "phpunit --colors=always",
+        "check-copy-paste": "./vendor/bin/phpcpd ./app --min-lines=4 --progress --no-interaction"
     }
 }

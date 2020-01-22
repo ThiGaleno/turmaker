@@ -1,41 +1,59 @@
 <?php
+
 namespace App\Http\Controllers\facades;
 
 use Illuminate\Support\Facades\DB;
 
-class HorarioControllerFacade{
-       
-    function gerarHorarios(){
-        $turmaSelects = [] ;            
-            $dias = ["segunda", "terça", "quarta", "quinta", "sexta"];           
-            $aulas = [1, 2, 3, 4];
-            //$turmas = [1, 2, 3, 4];
-            $periodos = ['matutino', 'vespertino'];
+class HorarioControllerFacade
+{
+    const DIAS = ["segunda", "terça", "quarta", "quinta", "sexta"];
+    const AULAS = [1, 2, 3, 4];
+    const PERIODOS = ['matutino', 'vespertino'];
 
-        foreach($periodos as $periodo){ 
-            foreach($dias as $dia){
-                foreach($aulas as $aula){
-                    
-                    $ordemAula[$aula] = DB::select(
-                        "SELECT materias.id as idMateria, materias.nome as materia FROM horarios 
-                        inner join turmas on horarios.turmas_id = turmas.id
-                        right join materias on horarios.materias_id = materias.id
-                        and turmas.periodo = '$periodo'
-                        and horarios.dia = '$dia'
-                        and horarios.ordem_aula = '$aula'
-                        WHERE turmas.nome is null"
-                    );
-                }
+    function gerarHorarios()
+    {
+        $turmaSelects = [];
+
+        foreach (self::PERIODOS as $periodo) {
+            foreach (self::DIAS as $dia) {
+                $ordemAula = self::getOrdemAula($periodo, $dia);
                 $ordemDia[$dia] = $ordemAula;
             }
             $ordemPeriodo[$periodo] = $ordemDia;
         }
-        $turmaSelects = $ordemPeriodo; 
-        //dd($turmaSelects);  //<------------> Descubra o resultado/estrutura de array que essa bagaceira de cima monta
+        $turmaSelects = $ordemPeriodo;
+
         return $turmaSelects;
     }
 
-    public function limparHorariosTurma($id){
+    public function limparHorariosTurma($id)
+    {
 
+    }
+
+    /**
+     * Retorna a Ordem das Aulas por Dias
+     *
+     * @param string $periodo
+     * @param string $dia
+     * @return array
+     */
+    public function getOrdemAula($periodo, $dia)
+    {
+        $ordemAula = [];
+
+        foreach (self::AULAS as $aula) {
+            $ordemAula[$aula] = DB::select(
+                "SELECT `materias`.`id` as `idMateria`, `materias`.`nome` as `materia` FROM `horarios`
+                        inner join `turmas` on `horarios`.`turmas_id` = `turmas`.`id`
+                        right join `materias` on `horarios`.`materias_id` = `materias`.`id`
+                        and `turmas`.`periodo` = '{$periodo}'
+                        and `horarios`.`dia` = '{$dia}'
+                        and `horarios`.`ordem_aula` = '{$aula}'
+                        WHERE turmas.nome is null"
+            );
+        }
+
+        return $ordemAula;
     }
 }

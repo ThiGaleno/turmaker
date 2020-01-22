@@ -9,24 +9,20 @@ use DB;
 class AlunoController extends Controller
 {
     public function index($id = null)
-    {        
+    {
         $turmas = Turma::all();
 
         $alunos =  DB::table('alunos')
-            ->join('turmas', 'alunos.turmas_id', 'turmas.id') 
-            ->select('alunos.id','alunos.nome','alunos.data_nascimento','alunos.turno','alunos.categoria','turmas.nome as turmas')   
+            ->join('turmas', 'alunos.turmas_id', 'turmas.id')
+            ->select('alunos.id','alunos.nome','alunos.data_nascimento','alunos.turno','alunos.categoria','turmas.nome as turmas')
             ->get();
 
-        if ($id)
-        {                       
+        if ($id) {
             $alunoId = Aluno::find($id);
-            return view('alunos',compact('alunoId','alunos','turmas'));                      
-        } 
-        else
-        {
-            return view('alunos',compact('alunos','turmas'));            
+            return view('alunos',compact('alunoId','alunos','turmas'));
         }
 
+        return view('alunos',compact('alunos','turmas'));
     }
 
     public function cadastrar(Request $request)
@@ -41,7 +37,7 @@ class AlunoController extends Controller
         $alunos = $request->all();
         Aluno::find($id)->update($alunos);
         return redirect()->route('alunos');
-        
+
     }
 
     public function deletar($id)
@@ -49,5 +45,5 @@ class AlunoController extends Controller
         Aluno::destroy($id);
         return redirect()->route('alunos');
     }
-    
+
 }
