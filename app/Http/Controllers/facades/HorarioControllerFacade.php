@@ -15,10 +15,7 @@ class HorarioControllerFacade
         $turmaSelects = [];
 
         foreach (self::PERIODOS as $periodo) {
-            foreach (self::DIAS as $dia) {
-                $ordemAula = self::getOrdemAula($periodo, $dia);
-                $ordemDia[$dia] = $ordemAula;
-            }
+            $ordemDia = $this->getOrdemDia($periodo);
             $ordemPeriodo[$periodo] = $ordemDia;
         }
         $turmaSelects = $ordemPeriodo;
@@ -26,10 +23,6 @@ class HorarioControllerFacade
         return $turmaSelects;
     }
 
-    public function limparHorariosTurma($id)
-    {
-
-    }
 
     /**
      * Retorna a Ordem das Aulas por Dias
@@ -55,5 +48,17 @@ class HorarioControllerFacade
         }
 
         return $ordemAula;
+    }
+    
+    public function getOrdemDia($periodo)
+    {
+        $ordemDia = [];
+        
+        foreach (self::DIAS as $dia) {
+            $ordemAula = self::getOrdemAula($periodo, $dia);
+            $ordemDia[$dia] = $ordemAula;
+        }
+        
+        return $ordemDia;
     }
 }
