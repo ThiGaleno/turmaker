@@ -53,6 +53,7 @@ class HorarioController extends Controller
 
     public function atualizar(Request $request, $id)
     {
+
         $horario = $request->all();
         echo ($horario['periodo']);
         echo ($horario['ordem_aula']);
@@ -60,8 +61,9 @@ class HorarioController extends Controller
         echo ($horario['id_materia']);
         echo ($horario['turma_id
         ']);
-
+        /*Horario::find($id)->update($horarios);
         return redirect()->route('horarios');
+        */
     }
 
     public function deletar($id)
