@@ -106,6 +106,7 @@
             <div class="modal-body mx-3">
                 <form action="{{ route('aluno.editar',$horarioId->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="csrf-token" id="token" value="{{ csrf_token() }}" />
                     <input type="hidden" name="_method" value="put">
                     <!-- codigo importante-->
                     @foreach($turmaSelects as $keyPeriodo => $dia)
