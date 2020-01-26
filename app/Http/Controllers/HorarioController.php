@@ -16,7 +16,7 @@ class HorarioController extends Controller
         $dias = Horario::all();
 
         $horarios = DB::table('horarios') //Preenche os horários na página de horários
-        ->join('turmas', 'horarios.turmas_id', 'turmas.id')
+            ->join('turmas', 'horarios.turmas_id', 'turmas.id')
             ->join('materias', 'horarios.materias_id', 'materias.id')
             ->select(
                 'horarios.id',
@@ -41,7 +41,6 @@ class HorarioController extends Controller
         }
 
         return view('horarios', compact('horarios', 'turmas'));
-
     }
 
     public function cadastrar(Request $request)
@@ -54,9 +53,13 @@ class HorarioController extends Controller
 
     public function atualizar(Request $request, $id)
     {
-        echo "testa de marfim";
-        $horarios = $request->all();
-        Horario::find($id)->update($horarios);
+        $horario = $request->all();
+        echo ($horario['periodo']);
+        echo ($horario['ordem_aula']);
+        echo ($horario['dia']);
+        echo ($horario['id_materia']);
+        echo ($horario['turma_id
+        ']);
 
         return redirect()->route('horarios');
     }
