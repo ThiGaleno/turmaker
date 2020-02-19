@@ -20,6 +20,7 @@ class HorarioControllerFacade
         }
         $turmaSelects = $ordemPeriodo;
 
+
         return $turmaSelects;
     }
 
@@ -44,21 +45,22 @@ class HorarioControllerFacade
                         and `horarios`.`dia` = '{$dia}'
                         and `horarios`.`ordem_aula` = '{$aula}'
                         WHERE turmas.nome is null"
+
             );
         }
 
         return $ordemAula;
     }
-    
+
     public function getOrdemDia($periodo)
     {
         $ordemDia = [];
-        
+
         foreach (self::DIAS as $dia) {
             $ordemAula = self::getOrdemAula($periodo, $dia);
             $ordemDia[$dia] = $ordemAula;
         }
-        
+
         return $ordemDia;
     }
 }

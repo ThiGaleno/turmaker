@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\facades\HorarioControllerFacade;
 use App\Horario;
 use App\Turma;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class HorarioController extends Controller
@@ -54,13 +55,34 @@ class HorarioController extends Controller
     public function atualizar(Request $request, $id)
     {
 
-        $horario = $request->all();
-        echo ($horario['periodo']);
-        echo ($horario['ordem_aula']);
-        echo ($horario['dia']);
-        echo ($horario['id_materia']);
-        echo ($horario['turma_id
-        ']);
+
+        collect($horarios = $request->all());
+
+        $dia =  $horarios['dia'];
+        $ordem_aula = $horarios['ordem_aula'];
+        $turmas_id = $horarios['turma_id'];
+        $periodo = $horarios['periodo'];
+        $materias_id = $horarios['id_materia'];
+
+        try {
+            return $horarios = DB::table('horarios')
+                ->where('turmas_id', $turmas_id)
+                ->where('ordem_aula', $ordem_aula)
+                ->where('dia', $dia)
+                ->update([
+                    'dia' => $dia,
+                    'ordem_aula' => $ordem_aula,
+                    'turmas_id' => $turmas_id,
+                    'professores_id' => null,
+                    'materia' => null,
+                    'materias_id' => $materias_id,
+                    'status' => null,
+                ]);
+        } catch (Exception $error) {
+            return $error;
+        }
+
+
         /*Horario::find($id)->update($horarios);
         return redirect()->route('horarios');
         */
@@ -69,7 +91,7 @@ class HorarioController extends Controller
     public function deletar($id)
     {
         $horarios = DB::table('horarios')
-            ->where('turmas_id', "$id")
+            ->where('turmas_id', $id)
             ->delete();
 
         return route('turma.deletar', $id);

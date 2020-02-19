@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
 
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,12 +29,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="/">Turmaker</a>
+      <a class="navbar-brand" href="/index">Turmaker</a>
 
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Inicio</span></a>
-        </li>
+
         <li class="nav-item">
           <a class="nav-link" href="../professores">Professores</a>
         </li>
@@ -43,9 +42,7 @@
         <li class="nav-item">
           <a class="nav-link" href="../alunos">Alunos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../horarios">Horários</a>
-        </li>
+
 
       </ul>
       <form class="form-inline my-2 my-lg-0">
