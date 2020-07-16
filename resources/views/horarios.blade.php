@@ -23,11 +23,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <div>#</div>
-                        <div class="font-weight-bold">1º horario </div>
-                        <div class="font-weight-bold">2º horario </div>
-                        <div class="font-weight-bold">3º horario </div>
-                        <div class="font-weight-bold">4º horario </div>
+                        <div class="font-weight-bold">Horários</div>
+                        <div class="font-weight-bold">1º </div>
+                        <div class="font-weight-bold">2º </div>
+                        <div class="font-weight-bold">3º </div>
+                        <div class="font-weight-bold">4º </div>
                     </div>
 
                     <div class="col">
