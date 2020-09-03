@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Aluno;
+use App\Http\Requests\CadastroAlunosRequest;
 use App\Turma;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 class AlunoController extends Controller
 {
     public function index($id = null)
@@ -14,18 +16,18 @@ class AlunoController extends Controller
 
         $alunos =  DB::table('alunos')
             ->join('turmas', 'alunos.turmas_id', 'turmas.id')
-            ->select('alunos.id','alunos.nome','alunos.data_nascimento','alunos.turno','alunos.categoria','turmas.nome as turmas')
+            ->select('alunos.id', 'alunos.nome', 'alunos.data_nascimento', 'alunos.turno', 'alunos.categoria', 'turmas.nome as turmas')
             ->get();
 
         if ($id) {
             $alunoId = Aluno::find($id);
-            return view('alunos',compact('alunoId','alunos','turmas'));
+            return view('alunos', compact('alunoId', 'alunos', 'turmas'));
         }
 
-        return view('alunos',compact('alunos','turmas'));
+        return view('alunos', compact('alunos', 'turmas'));
     }
 
-    public function cadastrar(Request $request)
+    public function cadastrar(CadastroAlunosRequest $request) //request de validação do formulário de cadastro
     {
         $alunos = $request->all();
         Aluno::create($alunos);
@@ -37,7 +39,6 @@ class AlunoController extends Controller
         $alunos = $request->all();
         Aluno::find($id)->update($alunos);
         return redirect()->route('alunos');
-
     }
 
     public function deletar($id)
@@ -45,5 +46,4 @@ class AlunoController extends Controller
         Aluno::destroy($id);
         return redirect()->route('alunos');
     }
-
 }
