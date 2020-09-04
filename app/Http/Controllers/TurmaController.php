@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Turma;
 use App\Professor;
 use App\Horario;
+use App\Http\Requests\CadastroTurmaRequest;
 use Illuminate\Support\Facades\DB;
 
 class TurmaController extends Controller
@@ -39,7 +40,7 @@ class TurmaController extends Controller
             throw new \InvalidArgumentException('A Turma selecionada é inválida');
         }
 
-        foreach ($dias as $dia){
+        foreach ($dias as $dia) {
             $this->horarioModel->salvarAulas($dia, $id, $turmas);
         }
     }
@@ -49,20 +50,20 @@ class TurmaController extends Controller
         $professores = Professor::all();
 
         $turmas = DB::table('turmas')
-        ->join('professors', 'turmas.professores_id', 'professors.id')
-        ->select('turmas.nome as turma','professors.nome as professor','periodo','turmas.id','professores_id')
-        ->get();
+            ->join('professors', 'turmas.professores_id', 'professors.id')
+            ->select('turmas.nome as turma', 'professors.nome as professor', 'periodo', 'turmas.id', 'professores_id')
+            ->get();
 
         if ($id) {
             $turmaId = Turma::find($id);
 
-            return view('turmas',compact('turmaId','turmas','professores'));
+            return view('turmas', compact('turmaId', 'turmas', 'professores'));
         }
 
-        return view('turmas',compact('turmas','professores'));
+        return view('turmas', compact('turmas', 'professores'));
     }
 
-    public function cadastrar(Request $request)
+    public function cadastrar(CadastroTurmaRequest $request)
     {
         $turmas = $request->all();
         $id = Turma::create($turmas)->id;
@@ -81,12 +82,11 @@ class TurmaController extends Controller
 
     public function deletar($id)
     {
-        Horario::where('turmas_id',"$id")
-        ->delete();
+        Horario::where('turmas_id', "$id")
+            ->delete();
 
         Turma::destroy($id);
 
         return redirect()->route('turmas');
     }
-
 }
