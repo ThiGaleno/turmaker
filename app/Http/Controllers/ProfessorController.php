@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CadastroProfessorRequest;
 use Illuminate\Http\Request;
 use App\Professor;
 use Illuminate\Support\Facades\Storage;
@@ -14,15 +15,15 @@ class ProfessorController extends Controller
             $professors = Professor::all();
             $prof = Professor::find($id);
 
-            return view('professores',compact('prof','professors'));
+            return view('professores', compact('prof', 'professors'));
         }
 
         $professors = Professor::all();
 
-        return view('professores',compact('professors'));
+        return view('professores', compact('professors'));
     }
 
-    public function cadastrar(Request $request)
+    public function cadastrar(CadastroProfessorRequest $request)
     {
         $professors = $request->all();
         Professor::create($professors);
@@ -44,8 +45,4 @@ class ProfessorController extends Controller
 
         return redirect()->route('professores');
     }
-
-
 }
-
-
