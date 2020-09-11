@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\facades\HorarioControllerFacade;
+
 use Illuminate\Http\Request;
 use App\Turma;
 use App\Professor;
 use App\Horario;
 use App\Http\Requests\CadastroTurmaRequest;
+use App\Jobs\PreencherHorarios;
 use Illuminate\Support\Facades\DB;
 
 class TurmaController extends Controller
@@ -28,22 +29,7 @@ class TurmaController extends Controller
      * @param int $id
      * @param array $turmas
      */
-    public function preencherHorarios($id, $turmas)
-    {
-        $dias = HorarioControllerFacade::DIAS;
 
-        if (empty($id)) {
-            throw new \InvalidArgumentException('O Id selecionado é inválido');
-        }
-
-        if (empty($turmas)) {
-            throw new \InvalidArgumentException('A Turma selecionada é inválida');
-        }
-
-        foreach ($dias as $dia) {
-            $this->horarioModel->salvarAulas($dia, $id, $turmas);
-        }
-    }
 
     public function index($id = null)
     {
@@ -67,7 +53,7 @@ class TurmaController extends Controller
     {
         $turmas = $request->all();
         $id = Turma::create($turmas)->id;
-        TurmaController::preencherHorarios($id, $turmas);
+        PreencherHorarios::dispatch($id, $turmas);
 
         return redirect()->route('turmas');
     }
